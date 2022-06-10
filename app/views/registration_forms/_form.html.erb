@@ -1,0 +1,110 @@
+
+
+
+
+<div class="w-full">
+<%= form_with(model: registration_form, class: 'w-full') do |form| %>
+  <% if registration_form.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(registration_form.errors.count, "error") %> prohibited this registration_form from being saved:</h2>
+
+      <ul>
+        <% registration_form.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div x-data="{ tab: 'vehicle_owner' }">
+    <div x-show="tab === 'vehicle_owner'">
+      <h3 class="text-center font-bold text-2xl">A Bit About You</h3>
+      <div class="my-5">
+        <%= form.label :f_name, "First Name", class: 'text-sm' %>
+        <%= form.text_field :f_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :l_name, "Last Name", class: 'text-sm' %>
+        <%= form.text_field :l_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :tel, "Cellphone Number - optional", class: 'text-sm' %>
+        <%= form.text_field :tel, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+         <p class="mt-2 text-sm text-gray-500" id="email-description">We can not contact you in case of emergency.</p>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :email, "Email Address - optional", class: 'text-sm' %>
+        <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        <p class="mt-2 text-sm text-gray-500" id="email-description">Complete this section if you want a registration confirmation. Helpful should you wish to dispute a ticket or infraction.</p>
+      </div>
+      <div class="mt-5">
+        <a :class="{ 'active': tab === 'vehicle' }" x-on:click.prevent="tab = 'vehicle'" href="#" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Next: Your Vehicle</a>
+      </div>
+    </div>
+
+    <div x-show="tab === 'vehicle'">
+      <h3 class="text-center font-bold text-2xl">About Your Vehicle</h3>
+      <div class="my-5">
+        <%= form.label :make, "Vehicle Make", class: 'text-sm' %>
+        <%= form.text_field :make, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :model, "Vehicle Model", class: 'text-sm' %>
+        <%= form.text_field :model, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :color, "Vehicle Color", class: 'text-sm' %>
+        <%= form.text_field :color, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :year, "Vehicle Year - optional", class: 'text-sm' %>
+        <%= form.text_field :year, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+        <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+          <a :class="{ 'active': tab === 'vehicle_owner' }" x-on:click.prevent="tab = 'vehicle_owner'" href="#" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm">Back: About You</a>
+          <a :class="{ 'active': tab === 'license' }" x-on:click.prevent="tab = 'license'" href="#" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Next: License Plate</a>
+        </div>
+    </div>
+
+    <div x-show="tab === 'license'">
+      <h3 class="text-center font-bold text-2xl">Licnese Plate</h3>
+      <div class="my-5">
+        <%= form.label :license_plate, "License Plate Number", class: 'text-sm' %>
+        <%= form.text_field :license_plate, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :prov_state, "Province / State Of Issue", class: 'text-sm' %>
+        <%= form.text_field :prov_state, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+        <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+          <a :class="{ 'active': tab === 'vehicle' }" x-on:click.prevent="tab = 'vehicle'" href="#" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm">Back: Your Vehicle</a>
+          <a :class="{ 'active': tab === 'visit' }" x-on:click.prevent="tab = 'visit'" href="#" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm">Next: Your Visit</a>
+        </div>
+    </div>
+
+    <div x-show="tab === 'visit'">
+      <h3 class="text-center font-bold text-2xl">Visit Duration</h3>
+      <div class="my-5">
+        <%= form.label :arrival_date, "Arrival Date", class: 'text-sm' %>
+        <%= form.date_field :arrival_date, min: Date.today, max: Date.today, class: 'lock shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :departure_date, "Departure Date", class: 'text-sm' %>
+        <%= form.date_field :departure_date, min: Date.today , max: 7.days.from_now, class: 'lock shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
+      </div>
+      <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+        <a :class="{ 'active': tab === 'vehicle' }" x-on:click.prevent="tab = 'vehicle'" href="#" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm">Back: Vehicle</a>
+        <%= form.submit "Register", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
